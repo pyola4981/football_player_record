@@ -1,0 +1,22 @@
+{
+    "server": {
+        "domain": "http://127.0.0.1:6001/",
+        "port": 6001
+    },
+    "aws": {
+        "host": "3.35.240.232",
+        "username": "root",
+        "password": "elememe06",
+        "port": 3306,
+        "database": "football_player_record",
+        "dialect": "mysql"
+    },
+    "mysql": {
+        "username": "root",
+        "password": "elememe06",
+        "database": "football_player_record",
+        "host": "localhost",
+        "dialect": "mysql",
+        "port": 3307
+    }
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>선수가 뛴 팀 경기 목록</h2>
+    <table class="table table-sm border-bottom">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Opponent</th>
+                <th scope="col">Tournament</th>
+                <th scope="col">Date</th>
+                <th scope="col">Result</th>
+                <th scope="col">Goal_for</th>
+                <th scope="col">Goal_against</th>
+                <th scope="col">Shot</th>
+                <th scope="col">Possession</th>
+                <th scope="col">Pass</th>
+                <th scope="col">Key_pass</th>
+                <th scope="col">Dribble</th>
+                <th scope="col">Tackle</th>
+                <th scope="col">Clear</th>
+                <th scope="col">Block</th>
+                <th scope="col">Rating</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(datas==null || datas.length==0){ %>
+                <tr>
+                    <td colspan = 1> 생성된 경기 성적이 없습니다. 이전 단계로 돌아가 생성해주세요.</td>
+                </tr>
+            <% } %>
+            <% datas.forEach(function(data) { %>
+                <tr>
+                    <td>
+                        <a href="/season/player/<%= data.player_id %>/teamgs/<%= data.id %>/playergs/show">
+                            <div class="title-ellipsis ellipsis float-left">
+                                <span class="title-text"><%= data.opponent %></span>
+                            </div>
+                        </a>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.tournament %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.date %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.result %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.goal_for %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.goal_against %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.shot %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.possession %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.pass %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.key_pass %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.dribble %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.tackle %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.clear %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.block %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.rating %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <form action="http://localhost:6001/season/team/<%= data.team_id %>/player/<%= data.player_id %>/teamgs/<%= data.id %>/delete" method="post">                  
+                            <input class="btn btn-primary"type="submit" value="삭제">                         
+                        </form>
+                    </td>
+                </tr>
+                <% if(data==datas[0]){ %>
+                    <form action="http://localhost:6001/season/team/<%= data.team_id %>/teamss/add" method="post">                  
+                        <input type="submit" value="팀 시즌 성적 생성">              
+                    </form>
+                    <a href="/season/team/<%= data.team_id %>/teamss/show">
+                        <button>팀 시즌 성적 보기</button>
+                    </a>    
+                    <a href="/season/player/<%= data.player_id %>/teamgs/<%= data.id %>/playergs/select">
+                        <button>선수 경기 성적 생성</button>
+                    </a>
+                    <a href="/season/show">
+                        <button>처음 단계</button>
+                    </a>
+                <% } %>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

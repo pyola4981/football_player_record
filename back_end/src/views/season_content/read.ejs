@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>게시글</h2>
+    <table class="table table-sm border-bottom">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Title</th>
+            </tr>
+            <% datas.forEach(function(data) { %>
+                <tr>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.title %></span>
+                        </div>
+                    </td>
+                </tr>
+            <% }) %>
+            <tr>
+                <th scope="col">Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(datas==null || datas.length==0){ %>
+                <tr>
+                    <td colspan = 1> 생성된 게시글이 없습니다. 처음 단계로 이동해서 게시글을 생성해주세요. </td>
+                    <a href="/season/show">
+                        <button>처음 단계</button>
+                    </a>
+                </tr>
+            <% } %>
+            <% datas.forEach(function(data) { %>
+                <tr>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.content %></span>
+                        </div>
+                    </td>
+                </tr>
+                <% if(data==datas[0]){ %>
+                    <a href="/board/season/<%= data.season_id %>/content/<%= data.id %>/comment/add">
+                        <button>댓글 생성</button>
+                    </a>
+                    <a href="/season/show">
+                        <button>처음 단계</button>
+                    </a>
+                <% } %>
+            <% }) %>
+        </tbody>
+        <thead class="thead-light">
+            <% if(comment==null || comment.length==0){ %>
+                <tr>
+                    <th scope="col">Comment</th>
+                </tr>
+                <tr>
+                    <td colspan = 1> 댓글이 없습니다. </td>
+                </tr>
+            <% } %>
+            <% comment.forEach(function(data) { %>
+                <% if(data==comment[0]){ %>
+                    <tr>
+                        <th scope="col">Comment</th>
+                        <th scope="col">Password</th>
+                        <th scope="col"></th>
+                    </tr>
+                <% } %>
+                <tr>
+                    <td>
+                        <div class="title-ellipsis ellipsis float-left">
+                            <span class="title-text"><%= data.content %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <form action="http://localhost:6001/board/content/<%= data.content_id %>/comment/<%= data.id %>/delete" method="post">
+                        <div class="title-ellipsis ellipsis float-left">
+                            <input name="password" type="text" placeholder="삭제 시 password 입력"/>
+                        </div>
+                    </td>
+                    <td>                  
+                            <input class="btn btn-primary"type="submit" value="삭제">                         
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </thead>
+    </table>
+</body>
+</html>

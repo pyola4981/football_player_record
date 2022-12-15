@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>시즌 목록</h2>
+    <a href="/season/add">
+        <button>시즌 생성</button>
+    </a>
+    <a href="/season/team/addselect">
+        <button>팀 생성</button>
+    </a>
+    <a href="/board/season/addselect">
+        <button>시즌 별 게시글 생성</button>
+    </a>
+    <a href="/board/season/select">
+        <button>시즌 별 게시판 이동</button>
+    </a>
+    <a href="/board/content/show">
+        <button>자유 게시판 이동</button>
+    </a>
+    <table class="table table-sm border-bottom">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Year</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(datas==null || datas.length==0){ %>
+                <tr>
+                    <td colspan = 1> 생성된 시즌이 없습니다. 시즌 생성 버튼을 눌러주세요.</td>
+                </tr>
+            <% } %>
+            <% datas.forEach(function(data) { %>
+                <tr>
+                    <td>
+                        <a href="/season/<%= data.id %>/team/show">
+                            <div class="title-ellipsis ellipsis float-left">
+                                <span class="title-text"><%= data.year %></span>
+                            </div>
+                        </a>
+                    </td>
+                    <td>
+                        <form action="http://localhost:6001/season/<%= data.id %>/delete" method="post">                  
+                            <input class="btn btn-primary"type="submit" value="삭제">                         
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
