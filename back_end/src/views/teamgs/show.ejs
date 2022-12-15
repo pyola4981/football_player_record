@@ -126,13 +126,13 @@
                         </div>
                     </td>
                     <td>
-                        <form action="http://localhost:6001/season/team/<%= data.team_id %>/player/<%= data.player_id %>/teamgs/<%= data.id %>/delete" method="post">                  
+                        <form action="http://3.35.240.232:6001/season/team/<%= data.team_id %>/player/<%= data.player_id %>/teamgs/<%= data.id %>/delete" method="post">                  
                             <input class="btn btn-primary"type="submit" value="삭제">                         
                         </form>
                     </td>
                 </tr>
                 <% if(data==datas[0]){ %>
-                    <form action="http://localhost:6001/season/team/<%= data.team_id %>/teamss/add" method="post">                  
+                    <form action="http://3.35.240.232:6001/season/team/<%= data.team_id %>/teamss/add" method="post">                  
                         <input type="submit" value="팀 시즌 성적 생성">              
                     </form>
                     <a href="/season/team/<%= data.team_id %>/teamss/show">
